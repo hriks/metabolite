@@ -23,10 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'dtvc#&_f9z*6yrt8m&68=j@@e02bla@_n@e29koj#oej*$qbyj'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", False)
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -37,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'web'
 ]
 
 MIDDLEWARE = [
@@ -75,9 +75,13 @@ WSGI_APPLICATION = 'metabolite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'metabolite' if DEBUG else 'lmchpabn',
+        'USER': 'hriks' if DEBUG else 'lmchpabn',
+        'PASSWORD': 'hriks' if DEBUG else '2TgrlSyAIas0WMEgTehZQlWg5j7YTo3R',
+        'HOST': 'localhost' if DEBUG else 'stampy.db.elephantsql.com',
+        'PORT': '5432',
+    },
 }
 
 
