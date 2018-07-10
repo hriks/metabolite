@@ -1,0 +1,4 @@
+# Procfile.dev - development
+
+# This Configuration for runnning server if server is not running via wsgi server
+web: python manage.py runserver
