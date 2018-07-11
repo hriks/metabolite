@@ -11,14 +11,23 @@
 			function drawChart() {
 				var data = google.visualization.arrayToDataTable(data_array);
 
-        		var options = {
-          		chart: {
-            		title: "Average NA Corrected with zero vs Name",
-            		subtitle: 'Sales, Expenses, and Profit: 2014-2017',
-          		}
-        		};
+				var view = new google.visualization.DataView(data);
+				view.setColumns([0, 1,
+					{ calc: "stringify",
+						sourceColumn: 1,
+						type: "string",
+						role: "annotation" },
+				2]);
+
+				var options = {
+					title: "Average NA Corrected with zero vs Name",
+					width: '100%',
+					height: 600,
+					bar: {groupWidth: "95%"},
+					legend: { position: "none" },
+				};
 				var chart = new google.charts.Bar(document.getElementById("columnchart_values"));
-				chart.draw(data, google.charts.Bar.convertOptions(options));
+				chart.draw(view, google.charts.Bar.convertOptions(options));
 			}
   		}
 
@@ -28,9 +37,9 @@
       		xmlHttp.open( "GET", url, false ); // false for synchronous request
       		xmlHttp.send( null );
       		value = JSON.parse(xmlHttp.responseText).response;
-      		resp = [["Average", "Metabolite"]]
+      		resp = [["Average", "Metabolite", { role: 'style' } ]]
       		for (key in value) {
-      			resp.push([key, value[key]])
+      			resp.push([key, value[key], "#b87333"])
       		}
       		create_chart(resp)
       		return resp
@@ -48,7 +57,7 @@
 			</div>
 			<div class="row">
 				<center>
-					<div id="columnchart_values" style="width: 70%; height: 300px;"></div>
+					<div id="columnchart_values" style="width: 90%; height: 300px;"></div>
 				</center>
 			</div>
 		</div>
