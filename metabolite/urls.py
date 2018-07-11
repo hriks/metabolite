@@ -19,7 +19,6 @@ from web import views
 
 urlpatterns = [
     url(r'^admin', admin.site.urls),
-    url(r'^metabolite/', views.MetaboliteInformations.as_view(),
-        name='getMetaboliteInformations'),  # noqa
-    url(r'^$', views.Dashboard.as_view()),
+    #url(r'^metabolite/', views.MetaboliteInformations.as_view(), name='getMetaboliteInformations'),  # noqa
+    #url(r'^$', views.Dashboard.as_view()),
 ]
