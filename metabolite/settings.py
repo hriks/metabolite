@@ -75,13 +75,14 @@ WSGI_APPLICATION = 'metabolite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
+print DEBUG
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'metabolite' if DEBUG else 'lmchpabn',
-        'USER': 'hriks' if DEBUG else 'lmchpabn',
-        'PASSWORD': 'hriks' if DEBUG else '2TgrlSyAIas0WMEgTehZQlWg5j7YTo3R',
-        'HOST': 'localhost' if DEBUG else 'stampy.db.elephantsql.com',
+        'NAME': 'metabolite' if DEBUG else 'yhtlshme',
+        'USER': 'hriks' if DEBUG else 'yhtlshme',
+        'PASSWORD': 'hriks' if DEBUG else 'OlBZoDD2bcUhTenr-vcvmy3bmh6wImU2',
+        'HOST': 'localhost' if DEBUG else 'pellefant.db.elephantsql.com',
         'PORT': '5432',
     },
 }
