@@ -6,7 +6,7 @@
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<script type="text/javascript">
   		function create_chart(data_array) {
-			google.charts.load("current", {packages:['bar']});
+			google.charts.load("current", {packages:['corechart']});
 			google.charts.setOnLoadCallback(drawChart);
 			function drawChart() {
 				var data = google.visualization.arrayToDataTable(data_array);
@@ -26,8 +26,8 @@
 					bar: {groupWidth: "95%"},
 					legend: { position: "none" },
 				};
-				var chart = new google.charts.Bar(document.getElementById("columnchart_values"));
-				chart.draw(view, google.charts.Bar.convertOptions(options));
+				var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+				chart.draw(view, options);
 			}
   		}
 
@@ -39,17 +39,28 @@
       		value = JSON.parse(xmlHttp.responseText).response;
       		resp = [["Average", "Metabolite", { role: 'style' } ]]
       		for (key in value) {
-      			resp.push([key, value[key], "#b87333"])
+      			resp.push([key, value[key], get_unique_color()])
       		}
       		create_chart(resp)
       		return resp
   		}
+
+  		function get_unique_color() {
+  			color =  '#'+Math.floor(Math.random()*16).toString(16)+
+    					Math.floor(Math.random()*16).toString(16)+
+    					Math.floor(Math.random()*16).toString(16)+
+    					Math.floor(Math.random()*16).toString(16)+
+    					Math.floor(Math.random()*16).toString(16)+
+    					Math.floor(Math.random()*16).toString(16);
+    		return color
+    	}
   </script>
 	<body>
 		<div class="container">
 			<div class="row">
 				<label> Select Metabolite
 				<select class="btn btn-primary form-control" onchange="get_data(this)">
+					<option value="">Select Metabolite</option>
 					{% for metabolite in metabolites %}
 						<option value="{{metabolite}}">{{metabolite|upper}}</option>
 					{% endfor %}
