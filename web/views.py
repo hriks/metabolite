@@ -11,8 +11,7 @@ from web.models import Intensity
 
 class Dashboard(views.View):
     template_name = 'dashboard.html'
-    metabolites = [name[0] for name in Intensity.objects.all(
-    ).values_list('name', flat=True).distinct()]
+    metabolites = [name[0] for name in Intensity.objects.all().values_list('name').distinct()]
 
     @method_decorator(views.decorators.csrf.csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
@@ -38,7 +37,7 @@ class MetaboliteInformations(views.View):
 
     def get_data(self, metabolite):
         intensity = Intensity.objects.filter(name=metabolite)
-        labels = [label[0] for label in intensity.values_list('label', flat=True).distinct()] # noqa
+        labels = [label[0] for label in intensity.values_list('label').distinct()] # noqa
         values = dict.fromkeys(labels, 0)
         for label in labels:
             distinct_intensity = intensity.filter(label=label)
